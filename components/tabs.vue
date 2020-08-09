@@ -34,7 +34,7 @@
 		},
 		methods: {
 			tabClick(query) {
-				if (query.disabled) return
+				if (this.name === query.label) return
 				uni.navigateTo({
 					url: query.path
 				})
