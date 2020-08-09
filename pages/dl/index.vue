@@ -9,7 +9,7 @@
 			<view class="list">
 				<view class="item" v-for="(item, index) in currentList" :key="item.date">
 					<view class="avatar">
-						<img :src="`https://oss.jx3box.com/icon/${iconList[index]}.png`" alt="">
+						<img :src="`https://oss.jx3box.com/icon/${item.icon || '572'}.png`" alt="">
 					</view>
 					<view class="info">
 						<view class="name">[{{ item.label }}]</view>
@@ -34,7 +34,6 @@
 			return {
 				list: [],
 				currentList: [],
-				iconList: [],
 				pageSize: 10,
 				currPage: 1,
 				scrollTop: 0
@@ -59,12 +58,16 @@
 		methods: {
 			async init() {
 				this.currPage = 1
+				this.scrollTop = 0
+				if (this.currentList.length) {
+					uni.stopPullDownRefresh()
+					return
+				}
 				const list = await fetch.get('http://47.94.91.181/assets/data/pvx_diaoluo.json')
 				this.list = list.data
 				this.currentList = this.list.slice(0, 10)
-				this.iconList = new Array(this.list.length).fill('572')
 				const array = []
-				this.list.forEach((item, index) => {
+				this.currentList.forEach((item, index) => {
 					array.push(this.submitIcon(item, index))
 				})
 				Promise.all(array).then(values => {
@@ -74,21 +77,17 @@
 			async submitIcon(item, index) {
 				return new Promise(async resolve => {
 					let IconID = '572'
-					if (item.icon) {
-						IconID = item.icon
-					} else {
+					if (!item.icon) {
 						const keywords = item.label.includes('・') ? item.label.slice(0, item.label.indexOf('・')) : item.label
 						const r = await fetch.get(`https://node.jx3box.com/item/name/${encodeURIComponent(keywords)}?strict=0`)
-
-
 						if (r[0]) {
 							let filters = r.filter(v => (v.Name === item.label))
 							if (filters[0]) {
 								IconID = filters[filters.length - 1].IconID
 							}
 						}
+						this.$set(item, 'icon', IconID)
 					}
-					this.$set(this.iconList, index, IconID)
 					resolve(index)
 				})
 
@@ -107,6 +106,9 @@
 				})
 				this.currPage++
 				this.currentList = this.list.slice(0, this.currPage * this.pageSize)
+				this.list.slice((this.currPage - 1) * this.pageSize, this.currPage * this.pageSize).forEach(item => {
+					this.submitIcon(item)
+				})
 				uni.hideLoading()
 			},
 			scroll(e) {
