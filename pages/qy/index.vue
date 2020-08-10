@@ -126,7 +126,7 @@
 			background-size: cover;
 			margin: 80rpx auto 40rpx;
 			border-radius: 10rpx;
-			
+
 			div {
 				position: absolute;
 				left: 0;
@@ -182,11 +182,11 @@
 						text-overflow: ellipsis;
 						white-space: nowrap;
 					}
-					
+
 					.name {
 						color: #666666;
 						width: 100%;
-						
+
 						.prefix {
 							display: inline-block;
 							max-width: calc(100% - 80rpx);
@@ -195,7 +195,7 @@
 							white-space: nowrap;
 							vertical-align: top;
 						}
-					
+
 						.suffix {
 							display: inline-block;
 							padding: 0 10rpx;

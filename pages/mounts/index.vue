@@ -54,7 +54,8 @@
 			<view class="list">
 				<view class="item" v-for="(item, index) in currentList" :key="item.uid">
 					<view class="avatar">
-						<img :src="`static/img/mounts/${item.icon}.png`" @click="doView(printscreen[item.name + '·' + item.suffix] || printscreen[item.name])" alt="">
+						<img :src="`static/img/mounts/${item.icon}.png`" @click="doView(printscreen[item.name + '·' + item.suffix] || printscreen[item.name])"
+						 alt="">
 					</view>
 					<view class="info">
 						<view class="name">
@@ -122,7 +123,7 @@
 					uni.stopPullDownRefresh()
 					return
 				}
-				
+
 				this.listAll = await fetch.get('http://47.94.91.181/assets/data/mounts/mounts.json')
 				this.printscreen = await fetch.get('http://47.94.91.181/assets/data/mounts/printscreen.json')
 				this.introductList = await fetch.get('http://47.94.91.181/assets/data/mounts/description.json')
@@ -212,13 +213,17 @@
 				if (this.specOpt.length) {
 					if (this.mountList[this.mountIndex] || this.mountId) {
 						list = list.filter(v => {
-							if ((v.attrs_1 && this.specOpt.includes(v.attrs_1.slice(0, 2))) || (v.attrs_2 && this.specOpt.includes(v.attrs_2.slice(0, 2))) || (v.attrs_3 && this.specOpt.includes(v.attrs_3.slice(0, 2))) || (v.attrs_4 && this.specOpt.includes(v.attrs_4.slice(0, 2))) || (v.attrs_5 && this.specOpt.includes(v.attrs_5.slice(0, 2)))) {
+							if ((v.attrs_1 && this.specOpt.includes(v.attrs_1.slice(0, 2))) || (v.attrs_2 && this.specOpt.includes(v.attrs_2
+									.slice(0, 2))) || (v.attrs_3 && this.specOpt.includes(v.attrs_3.slice(0, 2))) || (v.attrs_4 && this.specOpt.includes(
+									v.attrs_4.slice(0, 2))) || (v.attrs_5 && this.specOpt.includes(v.attrs_5.slice(0, 2)))) {
 								return true
 							}
 						})
 					} else {
 						list = this.listAll.filter(v => {
-							if ((v.attrs_1 && this.specOpt.includes(v.attrs_1.slice(0, 2))) || (v.attrs_2 && this.specOpt.includes(v.attrs_2.slice(0, 2))) || (v.attrs_3 && this.specOpt.includes(v.attrs_3.slice(0, 2))) || (v.attrs_4 && this.specOpt.includes(v.attrs_4.slice(0, 2))) || (v.attrs_5 && this.specOpt.includes(v.attrs_5.slice(0, 2)))) {
+							if ((v.attrs_1 && this.specOpt.includes(v.attrs_1.slice(0, 2))) || (v.attrs_2 && this.specOpt.includes(v.attrs_2
+									.slice(0, 2))) || (v.attrs_3 && this.specOpt.includes(v.attrs_3.slice(0, 2))) || (v.attrs_4 && this.specOpt.includes(
+									v.attrs_4.slice(0, 2))) || (v.attrs_5 && this.specOpt.includes(v.attrs_5.slice(0, 2)))) {
 								return true
 							}
 						})
@@ -259,7 +264,7 @@
 				opacity: 0.4;
 				background: #ffffff;
 			}
-			
+
 			.filter {
 				position: absolute;
 				width: 50rpx;
@@ -319,21 +324,22 @@
 						}
 					}
 				}
-				
+
 				.uni-list-checkbox {
 					margin-bottom: 34rpx;
-					
+
 					uni-checkbox-group {
 						width: 100%;
 						display: flex;
 						justify-content: space-between;
-						
+
 						.checkbox {
 							.yellow {
 								/deep/.uni-checkbox-input:hover {
 									border-color: #FFCC33 !important;
 								}
 							}
+
 							uni-text {
 								display: inline-block;
 								vertical-align: top;
@@ -426,7 +432,7 @@
 							margin-left: 10rpx;
 							vertical-align: top;
 						}
-						
+
 						.speed {
 							display: inline-block;
 							padding: 0 10rpx;
@@ -438,8 +444,10 @@
 							vertical-align: top;
 						}
 					}
-					
-					.name, .origin, .introduct {
+
+					.name,
+					.origin,
+					.introduct {
 						img {
 							width: 40rpx;
 							height: 40rpx;

@@ -155,7 +155,7 @@
 			background-size: cover;
 			margin: 80rpx auto 40rpx;
 			border-radius: 10rpx;
-			
+
 			div {
 				position: absolute;
 				left: 0;
